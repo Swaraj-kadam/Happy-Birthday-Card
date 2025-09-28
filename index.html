@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Birthday Mama 🎉</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      overflow: hidden;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      position: relative;
+      color: white;
+    }
+
+    /* Start button */
+    .start-btn {
+      background: linear-gradient(45deg,#ff4081,#ff6ec7);
+      border: none; color: #fff; padding: 18px 36px; border-radius: 50px;
+      font-weight:700; cursor:pointer; font-size:1.05rem; z-index:20;
+      box-shadow:0 8px 30px rgba(0,0,0,0.35); animation:pulse 1.6s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0% {transform:scale(1); box-shadow:0 8px 30px rgba(0,0,0,0.25);}
+      50% {transform:scale(1.06); box-shadow:0 18px 40px rgba(0,0,0,0.35);}
+      100% {transform:scale(1);}
+    }
+
+    .container {display:none;text-align:center;z-index:15;max-width:92%;padding:12px;}
+    h1 {
+      font-size:clamp(2rem,6vw,3.2rem); margin-bottom:8px;
+      filter:drop-shadow(0 6px 18px rgba(0,0,0,0.45));
+      background:linear-gradient(45deg,#ff6b6b,#ffd93d,#6bcf7f,#4ecdc4);
+      background-clip:text;-webkit-background-clip:text;color:transparent;
+      animation:gradientShift 5s ease-in-out infinite;
+    }
+    @keyframes gradientShift {
+      0% {background-position:0% 50%}
+      50% {background-position:100% 50%}
+      100% {background-position:0% 50%}
+    }
+    #typedText {min-height:96px;font-size:clamp(1rem,2.6vw,1.2rem);line-height:1.6;}
+
+    .emoji {margin-top:18px;display:flex;gap:18px;justify-content:center;font-size:1.8rem;}
+    .emoji span {cursor:pointer;transition:transform .25s ease;}
+    .emoji span:hover {transform:scale(1.3) rotate(10deg);}
+
+    .floating-emoji {position:absolute;pointer-events:none;opacity:0.95;}
+    .balloon {position:absolute;font-size:clamp(2rem,4vw,3rem);display:none;z-index:12;cursor:pointer;}
+    .particles {position:absolute;inset:0;pointer-events:none;z-index:1;}
+    .particle {
+      position:absolute;width:4px;height:4px;
+      background:rgba(255,255,255,0.8);
+      border-radius:50%;
+      animation:floatUp 5s linear infinite;
+    }
+    @keyframes floatUp {
+      0% {transform:translateY(100vh);opacity:0;}
+      10% {opacity:1;}
+      90% {opacity:1;}
+      100% {transform:translateY(-10px);opacity:0;}
+    }
+
+    .music-control {
+      position:fixed; top:18px; right:18px;
+      background:rgba(0,0,0,0.32); border-radius:999px;
+      padding:10px 14px; color:#fff; border:0; cursor:pointer; z-index:30; display:none;
+    }
+
+    @media (max-width:640px){
+      .start-btn{padding:14px 26px;font-size:.95rem;}
+      .emoji{gap:12px;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Start Button -->
+  <button class="start-btn" id="startBtn">🎁 Click to Celebrate 🎁</button>
+
+  <!-- Wish Container -->
+  <div class="container" id="wishBox">
+    <h1>🎂 Happy Birthday Mama! 🎉</h1>
+    <div id="typedText"></div>
+    <div class="emoji" id="emojiRow">
+      <span>🎈</span>
+      <span>🎂</span>
+      <span>🎊</span>
+      <span>🎁</span>
+      <span>💖</span>
+    </div>
+  </div>
+
+  <!-- Balloons -->
+  <div class="balloon" id="b1">🎈</div>
+  <div class="balloon" id="b2">🎈</div>
+  <div class="balloon" id="b3">🎈</div>
+  <div class="balloon" id="b4">🎈</div>
+  <div class="balloon" id="b5">🎈</div>
+
+  <!-- Music Control -->
+  <button class="music-control" id="musicBtn">🔊 Pause</button>
+
+  <audio id="birthdayAudio" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c8c56f1e3.mp3?filename=happy-birthday-123636.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Create particles
+    function createParticles(){
+      const container=document.getElementById('particles');
+      for(let i=0;i<60;i++){
+        const p=document.createElement('div'); p.className='particle';
+        p.style.left=Math.random()*100+'%';
+        p.style.animationDuration=(3+Math.random()*3)+'s';
+        p.style.width=p.style.height=(2+Math.random()*3)+'px';
+        container.appendChild(p);
+      }
+    }
+
+    // Typewriter effect
+    const fullMessage="Wishing you an amazing year ahead filled with joy, laughter, and unforgettable memories. May all your dreams come true! 🥳✨";
+    let typeIndex=0;
+    function typeWriter(){
+      const el=document.getElementById('typedText');
+      if(typeIndex<fullMessage.length){
+        el.innerHTML+=fullMessage.charAt(typeIndex);
+        typeIndex++; setTimeout(typeWriter,36);
+      }
+    }
+
+    // Floating emojis
+    function startFloatingEmojis(){
+      const pool=['🎂','🎁','🎉','💖','🎈','🥳'];
+      setInterval(()=>{
+        const e=document.createElement('div'); e.className='floating-emoji';
+        e.textContent=pool[Math.floor(Math.random()*pool.length)];
+        const size=Math.random()*26+18; e.style.fontSize=size+'px';
+        e.style.left=Math.random()*100+'vw'; e.style.top=(100+Math.random()*20)+'vh';
+        const dur=4500+Math.random()*3000; e.style.transition=`transform ${dur}ms linear, opacity ${dur}ms linear`;
+        document.body.appendChild(e);
+        requestAnimationFrame(()=>{ e.style.transform=`translateY(-120vh) rotate(${Math.random()*360}deg)`; e.style.opacity='0'; });
+        setTimeout(()=>e.remove(), dur+100);
+      },700);
+    }
+
+    // Balloons animation
+    function showBalloons(){
+      ['b1','b2','b3','b4','b5'].forEach((id,i)=>{
+        const el=document.getElementById(id);
+        el.style.display='block';
+        el.style.left=(10+i*18)+'%';
+        el.style.top=(70+Math.random()*8)+'vh';
+        el.style.transition=`transform ${1.2+Math.random()*0.8}s ease-out, top 1.2s ease-out`;
+        requestAnimationFrame(()=>{ el.style.transform=`translateY(-40vh) rotate(${Math.random()*40-20}deg)`; el.style.top=(30-Math.random()*12)+'vh'; });
+      });
+    }
+
+    // Start music
+    const audio=document.getElementById('birthdayAudio');
+    const musicBtn=document.getElementById('musicBtn');
+    musicBtn.style.display='block';
+    musicBtn.addEventListener('click',()=>{
+      if(audio.paused){ audio.play(); musicBtn.textContent='🔊 Pause'; }
+      else{ audio.pause(); musicBtn.textContent='🔇 Play'; }
+    });
+
+    // Start celebration
+    document.getElementById('startBtn').addEventListener('click',()=>{
+      document.getElementById('startBtn').style.display='none';
+      document.getElementById('wishBox').style.display='block';
+      audio.play();
+      typeWriter(); startFloatingEmojis(); showBalloons();
+    });
+
+    createParticles();
+  </script>
+</body>
+    </html>
+    
