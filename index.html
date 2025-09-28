@@ -174,12 +174,21 @@
     });
 
     // Start celebration
-    document.getElementById('startBtn').addEventListener('click',()=>{
-      document.getElementById('startBtn').style.display='none';
-      document.getElementById('wishBox').style.display='block';
-      audio.play();
-      typeWriter(); startFloatingEmojis(); showBalloons();
-    });
+    document.getElementById('startBtn').addEventListener('click', () => {
+  const audio = document.getElementById('birthdayAudio');
+  
+  // Play music after user clicks
+  audio.play().catch((err) => {
+    console.log("Audio play blocked:", err);
+  });
+
+  document.getElementById('startBtn').style.display = 'none';
+  document.getElementById('wishBox').style.display = 'block';
+  typeWriter();
+  startFloatingEmojis();
+  showBalloons();
+});
+
 
     createParticles();
   </script>
