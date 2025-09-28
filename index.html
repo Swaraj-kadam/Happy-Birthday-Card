@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Happy Birthday Mama 🎉</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { height: 100%; }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
     body {
       height: 100vh;
       display: flex;
@@ -18,75 +18,40 @@
       position: relative;
       color: white;
     }
-
-    /* Start button */
-    .start-btn {
+    .start-btn{
       background: linear-gradient(45deg,#ff4081,#ff6ec7);
       border: none; color: #fff; padding: 18px 36px; border-radius: 50px;
       font-weight:700; cursor:pointer; font-size:1.05rem; z-index:20;
       box-shadow:0 8px 30px rgba(0,0,0,0.35); animation:pulse 1.6s ease-in-out infinite;
     }
-    @keyframes pulse {
-      0% {transform:scale(1); box-shadow:0 8px 30px rgba(0,0,0,0.25);}
-      50% {transform:scale(1.06); box-shadow:0 18px 40px rgba(0,0,0,0.35);}
-      100% {transform:scale(1);}
+    @keyframes pulse{
+      0%{transform:scale(1);box-shadow:0 8px 30px rgba(0,0,0,0.25)}
+      50%{transform:scale(1.06);box-shadow:0 18px 40px rgba(0,0,0,0.35)}
+      100%{transform:scale(1);}
     }
-
-    .container {display:none;text-align:center;z-index:15;max-width:92%;padding:12px;}
-    h1 {
-      font-size:clamp(2rem,6vw,3.2rem); margin-bottom:8px;
-      filter:drop-shadow(0 6px 18px rgba(0,0,0,0.45));
+    .container{display:none;text-align:center;z-index:15;max-width:92%;padding:12px}
+    h1{font-size:clamp(2rem,6vw,3.2rem);margin-bottom:8px;filter:drop-shadow(0 6px 18px rgba(0,0,0,0.45));
       background:linear-gradient(45deg,#ff6b6b,#ffd93d,#6bcf7f,#4ecdc4);
       background-clip:text;-webkit-background-clip:text;color:transparent;
       animation:gradientShift 5s ease-in-out infinite;
     }
-    @keyframes gradientShift {
-      0% {background-position:0% 50%}
-      50% {background-position:100% 50%}
-      100% {background-position:0% 50%}
-    }
-    #typedText {min-height:96px;font-size:clamp(1rem,2.6vw,1.2rem);line-height:1.6;}
-
-    .emoji {margin-top:18px;display:flex;gap:18px;justify-content:center;font-size:1.8rem;}
-    .emoji span {cursor:pointer;transition:transform .25s ease;}
-    .emoji span:hover {transform:scale(1.3) rotate(10deg);}
-
-    .floating-emoji {position:absolute;pointer-events:none;opacity:0.95;}
-    .balloon {position:absolute;font-size:clamp(2rem,4vw,3rem);display:none;z-index:12;cursor:pointer;}
-    .particles {position:absolute;inset:0;pointer-events:none;z-index:1;}
-    .particle {
-      position:absolute;width:4px;height:4px;
-      background:rgba(255,255,255,0.8);
-      border-radius:50%;
-      animation:floatUp 5s linear infinite;
-    }
-    @keyframes floatUp {
-      0% {transform:translateY(100vh);opacity:0;}
-      10% {opacity:1;}
-      90% {opacity:1;}
-      100% {transform:translateY(-10px);opacity:0;}
-    }
-
-    .music-control {
-      position:fixed; top:18px; right:18px;
-      background:rgba(0,0,0,0.32); border-radius:999px;
-      padding:10px 14px; color:#fff; border:0; cursor:pointer; z-index:30; display:none;
-    }
-
-    @media (max-width:640px){
-      .start-btn{padding:14px 26px;font-size:.95rem;}
-      .emoji{gap:12px;}
-    }
+    @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    #typedText{min-height:96px;font-size:clamp(1rem,2.6vw,1.2rem);line-height:1.6}
+    .emoji{margin-top:18px;display:flex;gap:18px;justify-content:center;font-size:1.8rem}
+    .emoji span{cursor:pointer;transition:transform .25s ease}
+    .emoji span:hover{transform:scale(1.3) rotate(10deg)}
+    .floating-emoji{position:absolute;pointer-events:none;opacity:0.95}
+    .balloon{position:absolute;font-size:clamp(2rem,4vw,3rem);display:none;z-index:12;cursor:pointer}
+    .particles{position:absolute;inset:0;pointer-events:none;z-index:1}
+    .particle{position:absolute;width:4px;height:4px;background:rgba(255,255,255,0.8);border-radius:50%;animation:floatUp 5s linear infinite;}
+    @keyframes floatUp{0%{transform:translateY(100vh);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-10px);opacity:0}}
+    @media (max-width:640px){.start-btn{padding:14px 26px;font-size:.95rem}.emoji{gap:12px}}
   </style>
 </head>
 <body>
-  <!-- Particles -->
   <div class="particles" id="particles"></div>
-
-  <!-- Start Button -->
   <button class="start-btn" id="startBtn">🎁 Click to Celebrate 🎁</button>
 
-  <!-- Wish Container -->
   <div class="container" id="wishBox">
     <h1>🎂 Happy Birthday Mama! 🎉</h1>
     <div id="typedText"></div>
@@ -99,22 +64,13 @@
     </div>
   </div>
 
-  <!-- Balloons -->
   <div class="balloon" id="b1">🎈</div>
   <div class="balloon" id="b2">🎈</div>
   <div class="balloon" id="b3">🎈</div>
   <div class="balloon" id="b4">🎈</div>
   <div class="balloon" id="b5">🎈</div>
 
-  <!-- Music Control -->
-  <button class="music-control" id="musicBtn">🔊 Pause</button>
-
-  <audio id="birthdayAudio" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c8c56f1e3.mp3?filename=happy-birthday-123636.mp3" type="audio/mpeg">
-  </audio>
-
   <script>
-    // Create particles
     function createParticles(){
       const container=document.getElementById('particles');
       for(let i=0;i<60;i++){
@@ -126,7 +82,6 @@
       }
     }
 
-    // Typewriter effect
     const fullMessage="Wishing you an amazing year ahead filled with joy, laughter, and unforgettable memories. May all your dreams come true! 🥳✨";
     let typeIndex=0;
     function typeWriter(){
@@ -137,7 +92,6 @@
       }
     }
 
-    // Floating emojis
     function startFloatingEmojis(){
       const pool=['🎂','🎁','🎉','💖','🎈','🥳'];
       setInterval(()=>{
@@ -152,7 +106,6 @@
       },700);
     }
 
-    // Balloons animation
     function showBalloons(){
       ['b1','b2','b3','b4','b5'].forEach((id,i)=>{
         const el=document.getElementById(id);
@@ -164,34 +117,37 @@
       });
     }
 
-    // Start music
-    const audio=document.getElementById('birthdayAudio');
-    const musicBtn=document.getElementById('musicBtn');
-    musicBtn.style.display='block';
-    musicBtn.addEventListener('click',()=>{
-      if(audio.paused){ audio.play(); musicBtn.textContent='🔊 Pause'; }
-      else{ audio.pause(); musicBtn.textContent='🔇 Play'; }
+    // Web Audio Happy Birthday melody
+    let audioCtx=null;
+    const melody=[67,67,69,67,72,71,67,67,69,67,74,72,67,67,79,76,72,71,69,77,77,76,72,74,72];
+    const durations=[0.4,0.4,0.8,0.8,0.8,1.2,0.4,0.4,0.8,0.8,0.8,1.2,0.4,0.4,0.8,0.8,0.8,0.8,1.2,0.4,0.4,0.8,0.8,0.8,1.6];
+    function midiToFreq(m){return 440*Math.pow(2,(m-69)/12);}
+    function playMelody(){
+      if(!audioCtx) audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+      let totalTime=0;
+      let t=audioCtx.currentTime+0.05;
+      melody.forEach((note,i)=>{
+        if(note){
+          const osc=audioCtx.createOscillator(); const g=audioCtx.createGain();
+          osc.frequency.value=midiToFreq(note); osc.type='sine';
+          g.gain.setValueAtTime(0.0001,t);
+          g.gain.exponentialRampToValueAtTime(0.2,t+0.02);
+          g.gain.exponentialRampToValueAtTime(0.0001,t+durations[i]);
+          osc.connect(g); g.connect(audioCtx.destination);
+          osc.start(t); osc.stop(t+durations[i]);
+        }
+        t+=durations[i]; totalTime+=durations[i];
+      });
+      setTimeout(playMelody,(totalTime*1000));
+    }
+
+    document.getElementById('startBtn').addEventListener('click',()=>{
+      document.getElementById('startBtn').style.display='none';
+      document.getElementById('wishBox').style.display='block';
+      typeWriter(); startFloatingEmojis(); showBalloons(); playMelody();
     });
-
-    // Start celebration
-    document.getElementById('startBtn').addEventListener('click', () => {
-  const audio = document.getElementById('birthdayAudio');
-  
-  // Play music after user clicks
-  audio.play().catch((err) => {
-    console.log("Audio play blocked:", err);
-  });
-
-  document.getElementById('startBtn').style.display = 'none';
-  document.getElementById('wishBox').style.display = 'block';
-  typeWriter();
-  startFloatingEmojis();
-  showBalloons();
-});
-
 
     createParticles();
   </script>
 </body>
-    </html>
-    
+</html>
